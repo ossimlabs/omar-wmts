@@ -17,13 +17,6 @@ node(""){
     env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
     env.O2_DEV_HOME=pwd()
 
-include 'omar-wmts-app',
-        'omar-wmts-plugin',
-        'omar-geoscript-plugin',
-        'omar-openlayers-plugin',
-        'omar-hibernate-spatial-plugin',
-        'omar-core-plugin'
-
     stage("Checkout"){
         dir("ossim-ci") {
             git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
