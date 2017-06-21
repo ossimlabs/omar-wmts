@@ -24,7 +24,7 @@ Browse the SNAPSHOT and RELEASE jar files here:
 
 ##Configuration
 
-The [Dockerfile](#Dockerfile) section shows how to run the container and jar if you have configured a config server to m,anage all your configuration scripts.  Here we will show you the config properties required by the wmts service and how to specify the configuration directly when running the JAR service.  Create a file called applicaiton.yml with contents:
+The [Dockerfile](#dockerfile) section shows how to run the container and jar if you have configured a config server to m,anage all your configuration scripts.  Here we will show you the config properties required by the wmts service and how to specify the configuration directly when running the JAR service.  Create a file called applicaiton.yml with contents:
 
 ```
 server:
