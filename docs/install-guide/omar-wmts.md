@@ -2,10 +2,10 @@
 
 ## Dockerfile
 ```
-FROM omar-ossim-base
+FROM omar-base
 EXPOSE 8080
 RUN mkdir /usr/share/omar
-COPY omar-mensa-app-1.0.0-SNAPSHOT.jar /usr/share/omar
+COPY omar-wmts-app-1.0.0-SNAPSHOT.jar /usr/share/omar
 RUN chown -R 1001:0 /usr/share/omar
 RUN chown 1001:0 /usr/share/omar
 RUN chmod -R g+rw /usr/share/omar
@@ -14,7 +14,7 @@ USER 1001
 WORKDIR /usr/share/omar
 CMD java -server -Xms256m -Xmx1024m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit -Djava.security.egd=file:/dev/./urandom -jar omar-wmts-app-1.0.0-SNAPSHOT.jar
 ```
-Ref: [omar-base](../../../omar-ossim-base/docs/install-guide/omar-base/)
+Ref: [omar-base](../../../omar-base/docs/install-guide/omar-base/)
 
 ## JAR
 
