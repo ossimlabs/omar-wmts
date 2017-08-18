@@ -26,51 +26,6 @@ Browse the SNAPSHOT and RELEASE jar files here:
 
 The [Dockerfile](#dockerfile) section shows how to run the container and jar if you have configured a config server to m,anage all your configuration scripts.  Here we will show you the config properties required by the wmts service and how to specify the configuration directly when running the JAR service.  Create a file called applicaiton.yml with contents:
 
-```
-server:
-  contextPath: /omar-wmts
-
-serverName: "localhost"
-serverProtocol: "http"
-
-omarDb:
-  host: 
-  port: 5432
-  name: omardb-prod
-  url: jdbc:postgresql://${omarDb.host}:${omarDb.port}/${omarDb.name}
-  driver: org.postgresql.Driver
-  username: 
-  password:
-   
-environments:
-  production:
-    dataSource:
-      pooled: true
-      jmxExport: true
-      driverClassName: ${omarDb.driver}
-      url:      ${omarDb.url}
-      username: ${omarDb.username}
-      password: ${omarDb.password}
-
-endpoints:
-  enabled: true
-  health:
-    enabled: true
-
-omar:
-  wmts:
-    wfsUrl: http://omar-wfs-app:8080/omar-wfs/wfs
-    wmsUrl: http://omar-wms-app:8080/omar-wms/wms
-    oldmarWmsFlag: false
-    footprints:
-      url: ${serverProtocol}://${serverName}/omar-wms/footprints/getFootprints
-      layers: "omar:raster_entry"
-      styles: "byFileType"
-
-```
-
-where:
-
  * **server.contextPath** adds a context to the beginning of all endpoints
  * **serverName** is a Variable used throughout the application.yml file to specify the server name.  In this example we assume localhost
  * **serverProtocol** is a variable used to specify the protocol used.  Should be either http or https.
