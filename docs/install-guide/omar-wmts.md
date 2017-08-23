@@ -19,7 +19,7 @@ Ref: [omar-base](../../../omar-base/docs/install-guide/omar-base/)
 ## JAR
 
 Browse the SNAPSHOT and RELEASE jar files here:
-[omar-wmts-app](http://artifacts.radiantbluecloud.com/artifactory/webapp/#/artifacts/browse/tree/General/omar-local/io/ossim/omar/apps/omar-wmts-app)
+[omar-wmts-app](https://artifactory.ossim.io/artifactory/webapp/#/artifacts/browse/tree/General/omar-local/io/ossim/omar/apps/omar-wmts-app)
 
 
 ##Configuration
