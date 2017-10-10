@@ -4,8 +4,9 @@ import grails.converters.JSON
 
 //import grails.plugin.springsecurity.annotation.Secured
 import omar.core.BindUtil
-import com.github.rahulsom.swaggydoc.*
-import com.wordnik.swagger.annotations.*
+// import com.github.rahulsom.swaggydoc.*
+// import com.wordnik.swagger.annotations.*
+import io.swagger.annotations.*
 
 @Api(value = "wmts",
         description = "WMTS Support"
