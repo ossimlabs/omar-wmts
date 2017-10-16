@@ -191,3 +191,8 @@ omar:
           format: "image/jpeg"
         options:
           visible: true
+---
+swagger:
+  schemes:
+    - HTTPS
+    - HTTP
