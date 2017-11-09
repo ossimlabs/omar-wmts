@@ -268,6 +268,7 @@ class WebMapTileService implements InitializingBean{
                     layers: "omar:raster_entry",
                     format: cmd.format,
                     filter:"",
+                    styles: cmd.styles,
                     width: tileWidth,
                     height:tileHeight,
                     bbox:"${b.minX},${b.minY},${b.maxX},${b.maxY}",
