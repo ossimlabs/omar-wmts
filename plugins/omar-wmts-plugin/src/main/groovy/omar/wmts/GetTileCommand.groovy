@@ -15,7 +15,7 @@ class GetTileCommand extends WmtsCommand implements Validateable
    Integer tileRow = 0
    Integer tileCol = 0
    Integer tileMatrix = 0
-   Srtring styles="";
+   String styles="";
    static contraints = {
       tileMatrixSet nullable: false
       tileMatrix nullable: false
