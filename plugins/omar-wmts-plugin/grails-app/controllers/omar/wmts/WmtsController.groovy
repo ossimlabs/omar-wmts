@@ -8,7 +8,7 @@ import omar.core.BindUtil
 // import com.wordnik.swagger.annotations.*
 import io.swagger.annotations.*
 
-@Api(value = "wmts",
+@Api(value = "/wmts",
         description = "WMTS Support"
 )
 class WmtsController {
@@ -16,7 +16,7 @@ class WmtsController {
     def webMapTileService
 //    @Secured( ['IS_AUTHENTICATED_ANONYMOUSLY'] )
     @ApiOperation( value = "OGC WMTS service", produces = 'application/vnd.ogc.wms_xml',
-            notes="""
+            httpMethod = "GET", notes="""
 This is the main entry point for OGC WMTS services.  
 
 *   **service**
@@ -113,7 +113,7 @@ This is the main entry point for OGC WMTS services.
 
     }
 //    @Secured( ['IS_AUTHENTICATED_ANONYMOUSLY'] )
-    @ApiOperation( value = "Get the capabilities of the server", produces = 'application/vnd.ogc.wms_xml',
+    @ApiOperation( value = "Get the capabilities of the server", produces = 'application/vnd.ogc.wms_xml', httpMethod = "GET",
             notes="""
 Will return the capabilities of the server.  
 
@@ -165,7 +165,7 @@ Will return the capabilities of the server.
     }
 
 //    @Secured( ['IS_AUTHENTICATED_ANONYMOUSLY'] )
-    @ApiOperation( value = "Get an image tile from the server", produces = 'application/vnd.ogc.wms_xml',
+    @ApiOperation( value = "Get an image tile from the server", produces = 'application/vnd.ogc.wms_xml', httpMethod = "GET",
             notes="""
 This is the main entry point for OGC WMTS services.  
 
@@ -270,7 +270,7 @@ This is the main entry point for OGC WMTS services.
             }
         }
     }
-    @ApiOperation( value = "Get the layers defined in the WMTS service", produces = 'application/json',
+    @ApiOperation( value = "Get the layers defined in the WMTS service", produces = 'application/json', httpMethod = "GET",
             notes="""
 This is a simple service call that simplifies the layer listing to just dump the wmts layer table
 to a json formatted result
