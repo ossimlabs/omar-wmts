@@ -2,10 +2,7 @@ package omar.wmts
 
 import grails.converters.JSON
 
-//import grails.plugin.springsecurity.annotation.Secured
 import omar.core.BindUtil
-// import com.github.rahulsom.swaggydoc.*
-// import com.wordnik.swagger.annotations.*
 import io.swagger.annotations.*
 
 @Api(value = "/wmts",
@@ -14,7 +11,6 @@ import io.swagger.annotations.*
 class WmtsController {
 
     def webMapTileService
-//    @Secured( ['IS_AUTHENTICATED_ANONYMOUSLY'] )
     @ApiOperation( value = "OGC WMTS service", produces = 'application/vnd.ogc.wms_xml',
             httpMethod = "GET", notes="""
 This is the main entry point for OGC WMTS services.  
@@ -68,7 +64,7 @@ This is the main entry point for OGC WMTS services.
             @ApiImplicitParam( name = 'format', value = 'MIME type of result image', defaultValue = "image/jpeg", allowableValues = "image/jpeg, image/png", paramType = 'query', dataType = 'string', required = false ),
             @ApiImplicitParam( name = 'tileRow', value = 'Tile row', defaultValue = "0", paramType = 'query', dataType = 'integer', required = false ),
             @ApiImplicitParam( name = 'tileCol', value = 'Tile column', defaultValue = "0", paramType = 'query', dataType = 'integer', required = false ),
-            @ApiImplicitParam( name = 'tileMatrix', value = 'Tile matrix', defaultValue = "0", allowableValues = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20", paramType = 'query', dataType = 'string', required = false ),
+            @ApiImplicitParam( name = 'tileMatrix', value = 'Tile matrix', defaultValue = "0", allowableValues = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20", paramType = 'query', dataType = 'integer', required = false ),
             @ApiImplicitParam( name = 'tileMatrixSet', value = 'Tile matrix set', defaultValue = "WorldGeographic", paramType = 'query', dataType = 'string', required = false ),
     ] )
     def index() {
@@ -104,15 +100,13 @@ This is the main entry point for OGC WMTS services.
         }
         catch ( e )
         {
-          //println e.message
             log.error e.message.toString()
             response.status = 400
             render e.toString()
-          //  render contentType: 'application/xml', text: exceptionService.createMessage( e.message )
         }
 
     }
-//    @Secured( ['IS_AUTHENTICATED_ANONYMOUSLY'] )
+        
     @ApiOperation( value = "Get the capabilities of the server", produces = 'application/vnd.ogc.wms_xml', httpMethod = "GET",
             notes="""
 Will return the capabilities of the server.  
@@ -153,18 +147,11 @@ Will return the capabilities of the server.
         }
         catch ( e )
         {
-           // println "***************************************"
-           // e.printStackTrace()
             response.status = 400
             render e.toString()
-            //println "*"*40
-            //e.printStackTrace()
-            //println "*"*40
-           // render( contentType: 'application/xml', text: exceptionService.createMessage( e.message ) )
         }
     }
 
-//    @Secured( ['IS_AUTHENTICATED_ANONYMOUSLY'] )
     @ApiOperation( value = "Get an image tile from the server", produces = 'application/vnd.ogc.wms_xml', httpMethod = "GET",
             notes="""
 This is the main entry point for OGC WMTS services.  
@@ -210,11 +197,11 @@ This is the main entry point for OGC WMTS services.
             @ApiImplicitParam( name = 'service', value = 'OGC service type', allowableValues = "WMTS", defaultValue = 'WMTS', paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'version', value = 'Version to request', allowableValues = "1.0.0", defaultValue = '1.0.0', paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'request', value = 'Request type', allowableValues = "GetTile", defaultValue = 'GetCapabilities', paramType = 'query', dataType = 'string', required = true ),
-            @ApiImplicitParam( name = 'layer', value = 'Layer name', defaultValue = "WorldGeographic", paramType = 'query', dataType = 'integer', required = true ),
+            @ApiImplicitParam( name = 'layer', value = 'Layer name', defaultValue = "WorldGeographic", paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'format', value = 'MIME type of result image', defaultValue = "image/jpeg", allowableValues = "image/jpeg, image/png", paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'tileRow', value = 'Tile row', defaultValue = "0", paramType = 'query', dataType = 'integer', required = true ),
             @ApiImplicitParam( name = 'tileCol', value = 'Tile column', defaultValue = "0", paramType = 'query', dataType = 'integer', required = true ),
-            @ApiImplicitParam( name = 'tileMatrix', value = 'Tile matrix', defaultValue = "0", allowableValues = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20", paramType = 'query', dataType = 'string', required = true ),
+            @ApiImplicitParam( name = 'tileMatrix', value = 'Tile matrix', defaultValue = "0", allowableValues = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20", paramType = 'query', dataType = 'integer', required = true ),
             @ApiImplicitParam( name = 'tileMatrixSet', value = 'Tile matrix set', defaultValue = "WorldGeographic", paramType = 'query', dataType = 'string', required = true ),
     ] )
     def getTile()
@@ -228,9 +215,6 @@ This is the main entry point for OGC WMTS services.
         if(jsonData) requestParams << jsonData
         BindUtil.fixParamNames( GetTileCommand, requestParams )
         bindData( cmd, requestParams )
-
-
-        //println cmd
 
         // Getting the outputStream then testing in the finally will get rid
         // of the exceptions that state:
