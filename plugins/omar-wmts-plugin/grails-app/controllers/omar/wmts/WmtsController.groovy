@@ -60,7 +60,7 @@ This is the main entry point for OGC WMTS services.
             @ApiImplicitParam( name = 'service', value = 'OGC Service type', allowableValues = "WMTS", defaultValue = 'WMTS', paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'version', value = 'Version to request', allowableValues = "1.0.0", defaultValue = '1.0.0', paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'request', value = 'Request type', allowableValues = "GetCapabilities, GetTile", defaultValue = 'GetCapabilities', paramType = 'query', dataType = 'string', required = true ),
-            @ApiImplicitParam( name = 'layer', value = 'Layer name', defaultValue = "WorldGeographic", paramType = 'query', dataType = 'integer', required = true ),
+            @ApiImplicitParam( name = 'layer', value = 'Layer name', defaultValue = "WorldGeographic", paramType = 'query', dataType = 'string', required = true ),
             @ApiImplicitParam( name = 'format', value = 'MIME type of result image', defaultValue = "image/jpeg", allowableValues = "image/jpeg, image/png", paramType = 'query', dataType = 'string', required = false ),
             @ApiImplicitParam( name = 'tileRow', value = 'Tile row', defaultValue = "0", paramType = 'query', dataType = 'integer', required = false ),
             @ApiImplicitParam( name = 'tileCol', value = 'Tile column', defaultValue = "0", paramType = 'query', dataType = 'integer', required = false ),
