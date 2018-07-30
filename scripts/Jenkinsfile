@@ -43,14 +43,14 @@ node(""){
       stage ("Publish Artifactory")
       {
           withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                            credentialsId: 'artifactoryCredentials',
-                            usernameVariable: 'ARTIFACTORY_USER',
-                            passwordVariable: 'ARTIFACTORY_PASSWORD']])
+                            credentialsId: 'nexusCredentials',
+                            usernameVariable: 'REPOSITORY_MANAGER_USER',
+                            passwordVariable: 'REPOSITORY_MANAGER_PASSWORD']])
             {
                     sh """
                     pushd ${workspaceDir}/${appName}
-                    gradle :${appName}-plugin:artifactoryPublish
-                    gradle :${appName}-app:artifactoryPublish
+                    gradle :${appName}-plugin:upload
+                    gradle :${appName}-app:upload
                     popd
                     """
               }
