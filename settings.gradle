@@ -10,17 +10,8 @@ def final O2_DEV_HOME = System.getenv('O2_DEV_HOME')
 if ( O2_DEV_HOME ) {
 
 include 'omar-wmts-app',
-        'omar-wmts-plugin',
-        'omar-geoscript-plugin',
-        'omar-openlayers-plugin',
-        'omar-hibernate-spatial-plugin',
-        'omar-core-plugin'
+        'omar-wmts-plugin'
 
 project(':omar-wmts-app').projectDir = "${O2_DEV_HOME}/omar-wmts/apps/omar-wmts-app" as File
 project(':omar-wmts-plugin').projectDir = "${O2_DEV_HOME}/omar-wmts/plugins/omar-wmts-plugin" as File
-project(':omar-core-plugin').projectDir = "${O2_DEV_HOME}/omar-core/plugins/omar-core-plugin" as File
-project(':omar-hibernate-spatial-plugin').projectDir = "${O2_DEV_HOME}/omar-hibernate-spatial/plugins/omar-hibernate-spatial-plugin" as File
-project(':omar-openlayers-plugin').projectDir = "${O2_DEV_HOME}/omar-openlayers/plugins/omar-openlayers-plugin" as File
-project(':omar-geoscript-plugin').projectDir = "${O2_DEV_HOME}/omar-geoscript/plugins/omar-geoscript-plugin" as File
-
 }

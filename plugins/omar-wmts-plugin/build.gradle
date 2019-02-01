@@ -60,22 +60,18 @@ dependencyManagement {
   applyMavenExclusions false
 }
 
-grails {
-  plugins {
-    compile project(':omar-core-plugin')
-    compile project(':omar-geoscript-plugin')
-    compile project(':omar-hibernate-spatial-plugin')
-    compile project(':omar-openlayers-plugin')
-  }
-}
-
 dependencies {
+
+  compile "io.ossim.omar.plugins:omar-core-plugin:+"
+  compile "io.ossim.omar.plugins:omar-hibernate-spatial-plugin:+"
+  compile "io.ossim.omar.plugins:omar-geoscript-plugin:+"
+  compile "io.ossim.omar.plugins:omar-openlayers-plugin:+"
+
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
   compile "org.grails:grails-core"
   compile "org.springframework.boot:spring-boot-starter-actuator"
   compile "org.springframework.boot:spring-boot-starter-tomcat"
-  //compile "org.springframework.cloud:spring-cloud-starter-zipkin"
   compile "org.grails:grails-web-boot"
   compile "org.grails:grails-logging"
   compile "org.grails:grails-plugin-rest"
