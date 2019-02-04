@@ -15,7 +15,6 @@ node(""){
     def appName = "omar-wmts"
     def omarCommonProjName = "omar-common"
     env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
-    env.O2_DEV_HOME=pwd()
 
     stage("Checkout"){
         dir(appName) {

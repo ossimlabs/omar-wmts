@@ -5,13 +5,8 @@ pluginManagement {
   }
 }
 
-def final O2_DEV_HOME = System.getenv('O2_DEV_HOME')
-
-if ( O2_DEV_HOME ) {
-
 include 'omar-wmts-app',
         'omar-wmts-plugin'
 
-project(':omar-wmts-app').projectDir = "${O2_DEV_HOME}/omar-wmts/apps/omar-wmts-app" as File
-project(':omar-wmts-plugin').projectDir = "${O2_DEV_HOME}/omar-wmts/plugins/omar-wmts-plugin" as File
-}
+project(':omar-wmts-app').projectDir = "${rootProject.projectDir}/apps/omar-wmts-app" as File
+project(':omar-wmts-plugin').projectDir = "${rootProject.projectDir}/plugins/omar-wmts-plugin" as File
