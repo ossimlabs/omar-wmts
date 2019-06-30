@@ -14,7 +14,8 @@ if ( System.getenv('O2_INLINE_BUILD')) {
   def modules = [
       "omar-core",
       "omar-geoscript",
-      "omar-hibernate-spatial"
+      "omar-hibernate-spatial",
+      "omar-openlayers"
   ]
 
   modules.each { module ->
