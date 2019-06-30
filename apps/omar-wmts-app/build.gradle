@@ -23,7 +23,9 @@ assets {
 grails {
   plugins {
     compile project(':omar-wmts-plugin')
-    compile project(":omar-openlayers-plugin")
+    if ( System.getenv('O2_INLINE_BUILD') ) {
+      compile project(":omar-openlayers-plugin")
+    }
   }
 }
 
