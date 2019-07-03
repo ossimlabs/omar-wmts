@@ -35,8 +35,8 @@ omar:
       styles: "byFileType"
 
 # Set the context path for the application.
-#server:
-#  contextPath: /omar-wmts
+server:
+  contextPath: /omar-wmts
 
 # Define the http protocols that swagger can use.
 swagger:
