@@ -2,24 +2,37 @@
 grails:
     profile: web-plugin
     codegen:
-        defaultPackage: omar.wmts
-    spring:
-        transactionManagement:
-            proxies: false
+        defaultPackage: omar.wmts.plugin
+    gorm:
+        reactor:
+            # Whether to translate GORM events into Reactor events
+            # Disabled by default for performance reasons
+            events: false
 info:
     app:
         name: '@info.app.name@'
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
 spring:
+    jmx:
+        unique-names: true
+    main:
+        banner-mode: "off"
     groovy:
         template:
             check-template-location: false
-# Spring Actuator Endpoints are Disabled by Default
-endpoints:
-    enabled: false
-    jmx:
-        enabled: true
+    devtools:
+        restart:
+            additional-exclude:
+                - '*.gsp'
+                - '**/*.gsp'
+                - '*.gson'
+                - '**/*.gson'
+                - 'logback.groovy'
+                - '*.properties'
+management:
+    endpoints:
+        enabled-by-default: false
 
 ---
 grails:
@@ -70,39 +83,10 @@ grails:
             htmlcodec: xml
             codecs:
                 expression: html
-                scriptlets: html
+                scriptlet: html
                 taglib: none
                 staticparts: none
-endpoints:
-    jmx:
-        unique-names: true
----
-wfs:
-  featureTypeNamespaces:
-    - prefix: omar
-      uri: http://omar.ossim.org
-  datastores:
-    - namespaceId: omar
-      datastoreId: omardb-1.8.20-dev
-      datastoreParams:
-        dbtype: postgis
-        host: localhost
-        port: '5432'
-        database: omardb-1.8.20-dev
-        user: postgres
-        passwd: postgres
-        'Expose primary keys': 'true'
-        namespace: http://omar.ossim.org
-    - name: raster_entry
-      title: raster_entry
-      description: ''
-      keywords:
-        - omar
-        - raster_entry
-        - features
-      datastoreId: omardb-1.8.20-dev
-
-omar:
-  wmts:
-    workspace:
-      name: "omardb-1.8.20-dev"
+management:
+    endpoints:
+        jmx:
+            unique-names: true

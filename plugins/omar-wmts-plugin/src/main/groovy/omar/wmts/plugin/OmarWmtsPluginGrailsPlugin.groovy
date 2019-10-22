@@ -1,18 +1,18 @@
-package omar.wmts
+package omar.wmts.plugin
 
 import grails.plugins.*
 
-class OmarWmtsGrailsPlugin extends Plugin {
+class OmarWmtsPluginGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "3.1.10 > *"
+    def grailsVersion = "4.0.0 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
 
     // TODO Fill in these fields
-    def title = "Omar Wmts" // Headline display name of the plugin
+    def title = "Omar Wmts Plugin" // Headline display name of the plugin
     def author = "Your name"
     def authorEmail = ""
     def description = '''\
@@ -21,7 +21,7 @@ Brief summary/description of the plugin.
     def profiles = ['web']
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/omar-wmts"
+    def documentation = "http://grails.org/plugin/omar-wmts-plugin"
 
     // Extra (optional) plugin metadata
 
@@ -41,15 +41,7 @@ Brief summary/description of the plugin.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
     Closure doWithSpring() { {->
-            log.trace("doWithSpring(): Entered.............")
-
-            //println OmarSecurityUtils.application.config.grails.plugin.springsecurity
-            OmarWmtsReflectionUtils.application = OmarWmtsUtils.application = grailsApplication
-            OmarWmtsUtils.resetWmtsConfig()
-            // force reload by getting the config object
-            OmarWmtsUtils.wmtsConfig
-
-            log.trace("doWithSpring(): Leaving.............")
+            // TODO Implement runtime spring config (optional)
         }
     }
 

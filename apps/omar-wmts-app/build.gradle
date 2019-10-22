@@ -1,58 +1,13 @@
-assets {
-  minifyJs = true
-  minifyCss = true
-  includes = ["fonts/*"]
-  excludes = [
-    "**/*-debug.js",
-    "**/*-deps.js",
-    "**/*.gz",
-    "**/*.txt",
-    "**/*.less",
-    "**/*.html",
-    "**/i18n/**",
-    "**/",
-    ".grunt/**",
-    "**/locale/**",
-    "webjars/jquery/2.1.4/src/intro.js",
-    "webjars/jquery/2.1.4/src/outro.js",
-    "**/*.map",
-    "**/*.gzip"
-  ]
-}
-
 grails {
-  plugins {
-    compile project(':omar-wmts-plugin')
-    if ( System.getenv('O2_INLINE_BUILD') ) {
-      compile project(":omar-openlayers-plugin")
+    plugins {
+        compile project( ":${ rootProject.name }-plugin" )
+        if ( System.getenv('O2_INLINE_BUILD') ) {
+        //    compile project(":omar-core-plugin")
+        }
     }
-  }
 }
-
 dependencies {
-  if ( ! System.getenv('O2_INLINE_BUILD') ) {
-    compile "io.ossim.omar.plugins:omar-openlayers-plugin:${latestGradleIdentifier}"
-  }
-
-  // UI Webjar core dependencies
-  compile "org.webjars:jquery:2.1.4"
-  compile "org.webjars:jquery-ui:1.10.3"
-  compile "org.webjars:bootstrap:3.3.5"
-  compile "org.webjars.bower:angularjs:1.4.8"
-  compile "org.webjars.npm:angular-ui-bootstrap:0.14.3"
-  compile "org.webjars.bower:bootstrap-select:1.7.5"
-  compile "org.webjars.bower:angular-toastr:1.6.0"
-
-  // Font stuff
-  compile "org.webjars:font-awesome:4.4.0"
-  // Dark .css themes
-  compile "org.webjars:bootswatch-darkly:3.3.5+4"
-  compile "org.webjars:bootswatch-slate:3.3.5+4"
-  compile "org.webjars:bootswatch-superhero:3.3.5+4"
-
-  // Light .css themes
-  compile "org.webjars:bootswatch-spacelab:3.3.5+4"
-  compile "org.webjars:bootswatch-cosmo:3.3.5+4"
-  compile "org.webjars:bootswatch-flatly:3.3.5+4"
-  compile "org.webjars:bootswatch-default:3.3.5+4"
+    if ( ! System.getenv('O2_INLINE_BUILD') ) {
+    // compile "io.ossim.omar.plugins:omar-core-plugin:+"
+    }
 }

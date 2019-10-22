@@ -11,27 +11,30 @@ class OmarWmtsBootStrap
 
       if(!WmtsLayer.list())
       {
-         WmtsTileMatrixSet geographicTileMatrixSet = new WmtsTileMatrixSet(
-                 name: "WorldGeographic",
-                 minX:-180.0,
-                 minY:-90.0,
-                 maxX:180.0,
-                 maxY:90.0,
-                 minLevel: 0,
-                 maxLevel: 20,
-                 tileWidth: 256,
-                 tileHeight: 256,
-                 epsgCode:"epsg:4326" )
-         geographicTileMatrixSet.save(flush:true)
+         WmtsTileMatrixSet.withTransaction {
 
-         WmtsLayer worldGeographicLayer = new WmtsLayer(
-                                          name:"WorldGeographic",
-                                          title:"World Geographic Layer",
-                                          description:"World Geographic Layer",
-                                          wmtsTileMatrixSet:geographicTileMatrixSet
-                                       )
+            WmtsTileMatrixSet geographicTileMatrixSet = new WmtsTileMatrixSet(
+                  name: "WorldGeographic",
+                  minX:-180.0,
+                  minY:-90.0,
+                  maxX:180.0,
+                  maxY:90.0,
+                  minLevel: 0,
+                  maxLevel: 20,
+                  tileWidth: 256,
+                  tileHeight: 256,
+                  epsgCode:"epsg:4326" )
+            geographicTileMatrixSet.save(flush:true)
 
-         worldGeographicLayer.save(flush:true)
+            WmtsLayer worldGeographicLayer = new WmtsLayer(
+                                             name:"WorldGeographic",
+                                             title:"World Geographic Layer",
+                                             description:"World Geographic Layer",
+                                             wmtsTileMatrixSet:geographicTileMatrixSet
+                                          )
+
+            worldGeographicLayer.save(flush:true)
+         }
 
 /*         WmtsTileMatrixSet mercatorTileMatrixSet = new WmtsTileMatrixSet(
                  name: "WorldMercator",
