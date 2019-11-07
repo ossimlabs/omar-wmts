@@ -1,7 +1,7 @@
 package omar.wmts
 
+import grails.gorm.transactions.Transactional
 import omar.geoscript.LayerInfo
-import grails.transaction.Transactional
 import geoscript.workspace.Workspace
 import geoscript.geom.Bounds
 import geoscript.layer.Grid
