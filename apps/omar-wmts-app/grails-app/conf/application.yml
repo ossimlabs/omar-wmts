@@ -100,9 +100,10 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.postgres.Driver
+    driverClassName: org.postgresql.Driver
     username: postgres
     password: ${omarDb.password}
+    dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
 
 environments:
     development:
@@ -184,27 +185,27 @@ eureka:
     preferIpAddress: true
 
 ---
-environments:
-  production:
-    # This is for profile production.
-    # This is the default profile when using the java -jar execution.
-    # This section will hold the database connection values specific for the "driverClassName"
-    dataSource:
-      pooled: true
-      jmxExport: true
+# environments:
+#   production:
+#     # This is for profile production.
+#     # This is the default profile when using the java -jar execution.
+#     # This section will hold the database connection values specific for the "driverClassName"
+#     dataSource:
+#       pooled: true
+#       jmxExport: true
 
-      # The driver name used for connecting to the database.
-      driverClassName: ${omarDb.driver}
-      dialect:  ${omarDb.dialect}
+#       # The driver name used for connecting to the database.
+#       driverClassName: ${omarDb.driver}
+#       dialect:  ${omarDb.dialect}
 
-      # The JDBC connection string url.
-      url: jdbc:postgres://localhost:5432/omar_db
+#       # The JDBC connection string url.
+#       # url: jdbc:postgres://localhost:5432/omar_db
 
-      # The username for the database
-      username: postgres
+#       # The username for the database
+#       username: postgres
 
-      # The password for the database
-      password: password
+#       # The password for the database
+#       password: password
 
 logging:
   config: classpath:logback.groovy
