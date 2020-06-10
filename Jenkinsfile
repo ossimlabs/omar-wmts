@@ -42,33 +42,35 @@ podTemplate(
 {
   node(POD_LABEL){
 
-      stage("Checkout branch $BRANCH_NAME")
-      {
-          checkout(scm)
-      }
+    stage("Checkout branch $BRANCH_NAME")
+    {
+        checkout(scm)
+    }
 
-      stage("Load Variables")
-      {
-        withCredentials([string(credentialsId: 'o2-artifact-project', variable: 'o2ArtifactProject')]) {
-          step ([$class: "CopyArtifact",
-            projectName: o2ArtifactProject,
-            filter: "common-variables.groovy",
-            flatten: true])
-          }
-          load "common-variables.groovy"
-      }
-      stage('Build') {
-        container('builder') {
-          sh """
-          ./gradlew assemble \
-              -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-          ./gradlew copyJarToDockerDir \
-              -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-          """
-          archiveArtifacts "plugins/*/build/libs/*.jar"
-          archiveArtifacts "apps/*/build/libs/*.jar"
+    stage("Load Variables")
+    {
+      withCredentials([string(credentialsId: 'o2-artifact-project', variable: 'o2ArtifactProject')]) {
+        step ([$class: "CopyArtifact",
+          projectName: o2ArtifactProject,
+          filter: "common-variables.groovy",
+          flatten: true])
         }
+        load "common-variables.groovy"
+    }
+
+    stage('Build') {
+      container('builder') {
+        sh """
+        ./gradlew assemble \
+            -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
+        ./gradlew copyJarToDockerDir \
+            -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
+        """
+        archiveArtifacts "plugins/*/build/libs/*.jar"
+        archiveArtifacts "apps/*/build/libs/*.jar"
       }
+    }
+
     stage ("Publish Nexus"){	
       container('builder'){
           withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -83,6 +85,7 @@ podTemplate(
           }
         }
     }
+    
     stage('Docker build') {
       container('docker') {
         withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_DOWNLOAD_URL}") {  //TODO
@@ -91,31 +94,35 @@ podTemplate(
           """
         }
       }
-      stage('Docker push'){
-        container('docker') {
-          withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}") {
-          sh """
-              docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:${BRANCH_NAME}
-          """
-          }
-        }
-      }
-      stage('Package chart'){
-        container('helm') {
-          sh """
-              mkdir packaged-chart
-              helm package -d packaged-chart chart
-            """
-        }
-      }
-      stage('Upload chart'){
-          container('builder') {
-            withCredentials([usernameColonPassword(credentialsId: 'helmCredentials', variable: 'HELM_CREDENTIALS')]) {
-              sh "curl -u ${HELM_CREDENTIALS} ${HELM_UPLOAD_URL} --upload-file packaged-chart/*.tgz -v"
-            }
-          }
-        }
     }
+
+    stage('Docker push'){
+      container('docker') {
+        withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}") {
+        sh """
+            docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:${BRANCH_NAME}
+        """
+        }
+      }
+    }
+
+    stage('Package chart'){
+      container('helm') {
+        sh """
+            mkdir packaged-chart
+            helm package -d packaged-chart chart
+          """
+      }
+    }
+
+    stage('Upload chart'){
+      container('builder') {
+        withCredentials([usernameColonPassword(credentialsId: 'helmCredentials', variable: 'HELM_CREDENTIALS')]) {
+          sh "curl -u ${HELM_CREDENTIALS} ${HELM_UPLOAD_URL} --upload-file packaged-chart/*.tgz -v"
+        }
+      }
+    }
+
     stage("Clean Workspace"){
       if ("${CLEAN_WORKSPACE}" == "true")
         step([$class: 'WsCleanup'])
