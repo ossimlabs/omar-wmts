@@ -14,3 +14,4 @@ prodDb.mv.db
 packaged-chart
 *.lock
 charts/*.tgz
+bin
