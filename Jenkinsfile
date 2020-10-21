@@ -56,7 +56,7 @@ podTemplate(
         preVERSION = readFile "buildVersion.txt"
         VERSION = preVERSION.substring(0, preVERSION.indexOf('\n'))
 
-        GIT_TAG_NAME = "omar-wms" + "-" + VERSION
+        GIT_TAG_NAME = "omar-wmts" + "-" + VERSION
         ARTIFACT_NAME = "ArtifactName"
 
         script {
@@ -128,7 +128,7 @@ podTemplate(
       container('docker') {
         withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_DOWNLOAD_URL}") {  //TODO
           sh """
-            docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}" ./docker
+            docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}" ./docker
           """
         }
       }
@@ -138,7 +138,7 @@ podTemplate(
       container('docker') {
         withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}") {
         sh """
-            docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}"
+            docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}"
         """
         }
       }
@@ -167,4 +167,4 @@ podTemplate(
     }
   }
 }
-//test
+
