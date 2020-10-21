@@ -63,7 +63,7 @@ podTemplate(
         preVERSION = readFile "buildVersion.txt"
         VERSION = preVERSION.substring(0, preVERSION.indexOf('\n'))
 
-        GIT_TAG_NAME = "omar-wms" + "-" + VERSION
+        GIT_TAG_NAME = "omar-wmts" + "-" + VERSION
         ARTIFACT_NAME = "ArtifactName"
 
         script {
@@ -136,12 +136,12 @@ podTemplate(
         withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_DOWNLOAD_URL}") {  //TODO
           if (BRANCH_NAME == 'master'){
                 sh """
-                    docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}" ./docker
+                    docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}" ./docker
                 """
           }
           else {
                 sh """
-                    docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}".a ./docker
+                    docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}".a ./docker
                 """
           }
         }
@@ -153,19 +153,19 @@ podTemplate(
           withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}") {
             if (BRANCH_NAME == 'master'){
                 sh """
-                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}"
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}"
                 """
             }
             else if (BRANCH_NAME == 'dev') {
                 sh """
-                    docker tag "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}".a "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:dev
-                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}".a
-                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:dev
+                    docker tag "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}".a "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:dev
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}".a
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:dev
                 """
             }
             else {
                 sh """
-                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts-app:"${VERSION}".a           
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-wmts:"${VERSION}".a           
                 """
             }
           }
