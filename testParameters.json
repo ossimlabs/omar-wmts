@@ -1,0 +1,79 @@
+{
+  "info": {
+    "title": "Test Omar-wmts",
+    "format": {
+      "name": {
+        "method": ["get", "post", "delete", "etc..."],
+        "endpoint": "/controller/endpoint",
+        "in": ["query", "body"],
+        "parameters": [{"parameterName1": "value1", "parameterName2": "value2"}, { "body": {} }]
+      }
+    }
+  },
+  "tests": {
+    "getTileMinMaxParams": {
+      "method": "get",
+      "endpoint": "/wmts/getTile",
+      "in": "query",
+      "parameters": {
+        "service": "WMTS",
+        "version": "1.0.0",
+        "request": "GetTile",
+        "layer": "WorldGeographic",
+	"format": "Image/jpeg",
+	"tileRow": "0",
+	"tileCol": "0",
+	"tileMatrix": "0",
+	"tileMatrixSet": "WorldGeographic"
+	}
+    },
+    "getCapabilities": {
+      "method": "get",
+      "endpoint": "/wmts/getCapabilitiesMinMaxParams",
+      "in": "query",
+      "parameters": {
+        "service": "WMTS",
+        "version": "1.0.0",
+        "request": "GetCapabilities"
+      }
+    },
+    "layersNoParamsNeeded": {
+      "method": "get",
+      "endpoint": "/wmts/layers",
+      "in": "query",
+      "parameters": {
+        "service": "WMTS",
+        "version": "1.0.0",
+        "request": "GetCapabilities"
+      }
+    },	
+    "indexMinParams": {
+      "method": "get",
+      "endpoint": "/wmts/index",
+      "in": "query",
+      "parameters": {
+	"service": "WMTS",
+	"version": "1.0.0",
+	"request": "GetCapabilities",
+	"layer": "WorldGeographic"
+      } 
+    },
+    "indexMaxParams": {
+      "method": "get",
+      "endpoint": "/wmts/index",
+      "in": "query",
+      "parameters": {
+        "service": "WMTS",
+        "version": "1.0.0",
+        "request": "GetCapabilities",
+        "layer": "WorldGeographic",
+	"format": "Image/jpeg",
+	"tileRow": "0",
+	"tileCol": "0",
+	"tileMatrix": "0",
+	"tileMatrixSet": "WorldGeographic"
+      }
+    }
+    
+  }
+}
