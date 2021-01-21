@@ -15,65 +15,136 @@
       "method": "get",
       "endpoint": "/wmts/getTile",
       "in": "query",
+      "expected": "good",
       "parameters": {
         "service": "WMTS",
         "version": "1.0.0",
         "request": "GetTile",
         "layer": "WorldGeographic",
-	"format": "Image/jpeg",
-	"tileRow": "0",
-	"tileCol": "0",
-	"tileMatrix": "0",
-	"tileMatrixSet": "WorldGeographic"
-	}
+        "format": "Image/jpeg",
+        "tileRow": "0",
+        "tileCol": "0",
+        "tileMatrix": "0",
+        "tileMatrixSet": "WorldGeographic"
+      }
     },
-    "getCapabilities": {
+    "getTileMinMaxParams": {
       "method": "get",
-      "endpoint": "/wmts/getCapabilitiesMinMaxParams",
+      "endpoint": "/wmts/getTile",
       "in": "query",
+      "expected": "bad",
+      "parameters": {
+        "version": "1.0.0",
+        "request": "GetTile",
+        "layer": "WorldGeographic",
+        "format": "Image/jpeg",
+        "tileRow": "0",
+        "tileCol": "0",
+        "tileMatrix": "0",
+        "tileMatrixSet": "WorldGeographic"
+      }
+    },
+
+    "getCapabilitiesMinMaxParamsGood": {
+      "method": "get",
+      "endpoint": "/wmts/getCapabilities",
+      "in": "query",
+      "expected": "good",
       "parameters": {
         "service": "WMTS",
         "version": "1.0.0",
         "request": "GetCapabilities"
       }
     },
+
+    "getCapabilitiesMinMaxParamsBad": {
+      "method": "get",
+      "endpoint": "/wmts/getCapabilities",
+      "in": "query",
+      "expected": "bad",
+      "parameters": {
+      }
+    },
+
     "layersNoParamsNeeded": {
       "method": "get",
       "endpoint": "/wmts/layers",
       "in": "query",
+      "expected": "good",
       "parameters": {
         "service": "WMTS",
         "version": "1.0.0",
         "request": "GetCapabilities"
       }
-    },	
+    },
+    "indexMinParamsGood": {
+      "method": "get",
+      "endpoint": "/wmts/index",
+      "in": "query",
+      "expected": "good",
+      "parameters": {
+        "service": "WMTS",
+        "version": "1.0.0",
+        "request": "GetCapabilities",
+        "layer": "WorldGeographic"
+      }
+    },
+    "indexMinParamsBad": {
+      "method": "get",
+      "endpoint": "/wmts/index",
+      "in": "query",
+      "expected": "bad",
+      "parameters": {
+        "service": "WMTS",
+        "version": "1.0.0"
+      }
+    },
+
     "indexMinParams": {
       "method": "get",
       "endpoint": "/wmts/index",
       "in": "query",
+      "expected": "good",
       "parameters": {
-	"service": "WMTS",
-	"version": "1.0.0",
-	"request": "GetCapabilities",
-	"layer": "WorldGeographic"
-      } 
+        "service": "WMTS",
+        "version": "1.0.0",
+        "request": "GetCapabilities",
+        "layer": "WorldGeographic"
+      }
     },
+
     "indexMaxParams": {
       "method": "get",
       "endpoint": "/wmts/index",
       "in": "query",
+      "expected": "good",
       "parameters": {
         "service": "WMTS",
         "version": "1.0.0",
         "request": "GetCapabilities",
         "layer": "WorldGeographic",
-	"format": "Image/jpeg",
-	"tileRow": "0",
-	"tileCol": "0",
-	"tileMatrix": "0",
-	"tileMatrixSet": "WorldGeographic"
+        "format": "Image/jpeg",
+        "tileRow": 0,
+        "tileCol": 0,
+        "tileMatrix": 0,
+        "tileMatrixSet": "WorldGeographic"
+      }
+    },
+
+    "indexMaxParams": {
+      "method": "get",
+      "endpoint": "/wmts/index",
+      "in": "query",
+      "expected": "bad",
+      "parameters": {
+        "layer": "WorldGeographic",
+        "format": "Image/jpeg",
+        "tileRow": 0,
+        "tileCol": 0,
+        "tileMatrix": 0,
+        "tileMatrixSet": "WorldGeographic"
       }
     }
-    
+
   }
 }
