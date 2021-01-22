@@ -11,7 +11,7 @@
     }
   },
   "tests": {
-    "getTileMinMaxParams": {
+    "getTileMinMaxParamsGood": {
       "method": "get",
       "endpoint": "/wmts/getTile",
       "in": "query",
@@ -28,15 +28,12 @@
         "tileMatrixSet": "WorldGeographic"
       }
     },
-    "getTileMinMaxParams": {
+    "getTileMinMaxParamsBad": {
       "method": "get",
       "endpoint": "/wmts/getTile",
       "in": "query",
       "expected": "bad",
       "parameters": {
-        "version": "1.0.0",
-        "request": "GetTile",
-        "layer": "WorldGeographic",
         "format": "Image/jpeg",
         "tileRow": "0",
         "tileCol": "0",
@@ -100,20 +97,8 @@
       }
     },
 
-    "indexMinParams": {
-      "method": "get",
-      "endpoint": "/wmts/index",
-      "in": "query",
-      "expected": "good",
-      "parameters": {
-        "service": "WMTS",
-        "version": "1.0.0",
-        "request": "GetCapabilities",
-        "layer": "WorldGeographic"
-      }
-    },
 
-    "indexMaxParams": {
+    "indexMaxParamsGood": {
       "method": "get",
       "endpoint": "/wmts/index",
       "in": "query",
@@ -131,7 +116,7 @@
       }
     },
 
-    "indexMaxParams": {
+    "indexMaxParamsBad": {
       "method": "get",
       "endpoint": "/wmts/index",
       "in": "query",
