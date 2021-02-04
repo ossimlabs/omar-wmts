@@ -38,6 +38,13 @@ podTemplate(
       command: 'cat',
       ttyEnabled: true
     ),
+    containerTemplate(
+        name: 'cypress',
+        image: "${DOCKER_REGISTRY_DOWNLOAD_URL}/cypress/included:4.9.0",
+        ttyEnabled: true,
+        command: 'cat',
+        privileged: true
+    )
   ],
   volumes: [
     hostPathVolume(
@@ -102,6 +109,27 @@ podTemplate(
     DOCKER_IMAGE_PATH = "${DOCKER_REGISTRY_PRIVATE_UPLOAD_URL}/omar-wmts"
 
     }
+
+
+    stage ("Run Cypress Test") {
+        container('cypress') {
+            try {
+                sh """
+                cypress run --headless
+                """
+            } catch (err) {}
+            sh """
+                npm i -g xunit-viewer
+                xunit-viewer -r results -o results/omar-wmts-test-results.html
+                """
+                junit 'results/*.xml'
+                archiveArtifacts "results/*.xml"
+                archiveArtifacts "results/*.html"
+                s3Upload(file:'results/omar-wmts-test-results.html', bucket:'ossimlabs', path:'cypressTests/')
+            }
+        }
+
+
 
     stage('Build') {
       container('builder') {
@@ -211,7 +239,7 @@ podTemplate(
 
     stage("Clean Workspace"){
       if ("${CLEAN_WORKSPACE}" == "true")
-        step([$class: 'WsCleanup'])
+        step([$class: 'WsCleanup']) 
     }
   }
 }
