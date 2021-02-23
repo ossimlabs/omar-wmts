@@ -147,7 +147,7 @@ podTemplate(
     stage ("Publish Nexus"){	
       container('builder'){
           withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                          credentialsId: 'nexusCredentials',
+                          credentialsId: 'ossimlabs-minion',
                           usernameVariable: 'MAVEN_REPO_USERNAME',
                           passwordVariable: 'MAVEN_REPO_PASSWORD']])
           {
