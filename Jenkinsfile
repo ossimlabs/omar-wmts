@@ -229,10 +229,10 @@ node(POD_LABEL){
                               -m "Build: ${env.BUILD_NUMBER}"
                               git push -v origin "${GIT_TAG_NAME}"
                           """
-                    }
-                }
+                 }
             }
-    `   }
+        }
+    }
     
     stage("Clean Workspace")
         {
