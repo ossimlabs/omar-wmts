@@ -132,18 +132,6 @@ node(POD_LABEL){
 //             }
 //         }
 //     }
-    
-    
-    {
-        sh """
-        ./gradlew assemble \
-            -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-        ./gradlew copyJarToDockerDir \
-            -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-        """
-        archiveArtifacts "plugins/*/build/libs/*.jar"
-        archiveArtifacts "apps/*/build/libs/*.jar"
-      }
 
     stage('Build') {	
       container('builder'){
