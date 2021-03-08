@@ -232,13 +232,7 @@ node(POD_LABEL){
                  }
             }
         }
-    }
-    
-    stage("Clean Workspace")
-        {
-            if ("${CLEAN_WORKSPACE}" == "true")
-            step([$class: 'WsCleanup']) 
-        }
-    }
+    } 
+  }
 }
 //
